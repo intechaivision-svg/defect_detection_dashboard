@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { LiveInspectionFeed } from '../components/monitoring/LiveInspectionFeed';
+import { CameraFeedGrid } from '../components/monitoring/CameraFeedGrid';
 import { ActiveInspections } from '../components/monitoring/ActiveInspections';
+import { CameraFeedGrid } from '../components/monitoring/CameraFeedGrid';
+import { LiveInspectionFeed } from '../components/monitoring/LiveInspectionFeed';
 import { InspectionOverlay } from '../components/monitoring/InspectionOverlay';
 
 export const LiveMonitoring: React.FC = () => {
@@ -24,13 +26,28 @@ export const LiveMonitoring: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
+      <div className="space-y-6">
+        <CameraFeedGrid />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <LiveInspectionFeed results={liveResults} />
-        </div>
-        <div className="space-y-6">
-          <ActiveInspections />
-          <InspectionOverlay />
+          <div className="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Detection Summary</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 bg-red-50 rounded-lg">
+                <p className="text-2xl font-bold text-red-600">
+                  {liveResults.filter(r => r.status === 'fail').length}
+                </p>
+                <p className="text-sm text-red-600">Failures</p>
+              </div>
+              <div className="text-center p-4 bg-green-50 rounded-lg">
+                <p className="text-2xl font-bold text-green-600">
+                  {liveResults.filter(r => r.status === 'pass').length}
+                </p>
+                <p className="text-sm text-green-600">Passes</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

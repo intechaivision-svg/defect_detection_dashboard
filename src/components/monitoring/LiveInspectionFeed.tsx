@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, AlertTriangle, Activity } from 'lucide-react';
 import { InspectionResult } from '../../types';
 import { formatDistanceToNow } from 'date-fns';
 
