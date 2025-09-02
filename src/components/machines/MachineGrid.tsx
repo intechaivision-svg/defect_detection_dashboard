@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Camera, Wifi, WifiOff, Settings, MapPin, Clock } from 'lucide-react';
 import { RootState } from '../../store';
+import { updateMachineStatus } from '../../store/slices/machinesSlice';
 import { formatDistanceToNow } from 'date-fns';
 
 export const MachineGrid: React.FC = () => {
+  const dispatch = useDispatch();
   const machines = useSelector((state: RootState) => state.machines.machines);
 
   const getStatusColor = (status: string) => {
@@ -33,6 +35,11 @@ export const MachineGrid: React.FC = () => {
     }
   };
 
+  const handleToggleMachine = (machineId: string, currentStatus: string) => {
+    const newStatus = currentStatus === 'online' ? 'offline' : 'online';
+    dispatch(updateMachineStatus({ id: machineId, status: newStatus }));
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {machines.map((machine) => (
@@ -46,6 +53,28 @@ export const MachineGrid: React.FC = () => {
               </div>
             </div>
             {getStatusIcon(machine.status)}
+          </div>
+
+          <div className="mb-4">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-700">Camera Power</span>
+              <button
+                onClick={() => handleToggleMachine(machine.id, machine.status)}
+                disabled={machine.status === 'maintenance'}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  machine.status === 'online' ? 'bg-green-600' : 'bg-gray-200'
+                } ${machine.status === 'maintenance' ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    machine.status === 'online' ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            {machine.status === 'maintenance' && (
+              <p className="text-xs text-yellow-600 mt-1">Camera in maintenance mode</p>
+            )}
           </div>
 
           <div className="space-y-3">
