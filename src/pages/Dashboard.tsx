@@ -1,8 +1,6 @@
 import React from 'react';
 import { StatsGrid } from '../components/dashboard/StatsGrid';
 import { ModuleToggleGrid } from '../components/dashboard/ModuleToggleGrid';
-import { RecentInspections } from '../components/inspections/RecentInspections';
-import { SystemStatus } from '../components/dashboard/SystemStatus';
 import { CameraFeedGrid } from '../components/monitoring/CameraFeedGrid';
 import { LiveInspectionFeed } from '../components/monitoring/LiveInspectionFeed';
 import { useSelector } from 'react-redux';
@@ -45,11 +43,6 @@ export const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentInspections />
-        <SystemStatus />
       </div>
     </div>
   );

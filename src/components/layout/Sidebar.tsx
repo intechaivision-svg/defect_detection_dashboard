@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  Camera, 
   Activity, 
   Users, 
   FileText, 
@@ -13,7 +12,6 @@ import {
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Live Monitoring', href: '/monitoring', icon: Activity },
-  { name: 'Machines', href: '/machines', icon: Camera },
   { name: 'Analytics', href: '/analytics', icon: TrendingUp },
   { name: 'Reports', href: '/reports', icon: FileText },
   { name: 'Users', href: '/users', icon: Users },
