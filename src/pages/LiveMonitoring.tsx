@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { CameraFeedGrid } from '../components/monitoring/CameraFeedGrid';
 import { ActiveInspections } from '../components/monitoring/ActiveInspections';
-import { CameraFeedGrid } from '../components/monitoring/CameraFeedGrid';
 import { LiveInspectionFeed } from '../components/monitoring/LiveInspectionFeed';
 import { InspectionOverlay } from '../components/monitoring/InspectionOverlay';
 
